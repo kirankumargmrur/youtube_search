@@ -1,0 +1,68 @@
+version: "3.3"
+
+networks:
+  back-tier:
+
+services:
+  db:
+    image: postgres:12
+    container_name: metabase_db
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: wDnfWovh4uf3
+    ports:
+      - "5432:5432"
+    networks:
+      - back-tier
+    volumes:
+      - ./postgresql:/var/lib/postgresql
+      - ./postgresql_data:/var/lib/postgresql/data
+
+  rabbitmq:
+    image: rabbitmq:3.8.17-management
+    container_name: 'rabbitmq'
+    hostname: rabbimq
+    ports:
+      - 5672:5672
+      - 15672:15672
+    volumes:
+      - ./rabbitmq/data/:/var/lib/rabbitmq/
+      - ./rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - back-tier
+
+  adminer:
+    image: adminer
+    restart: always
+    depends_on:
+      - db
+    networks:
+      - back-tier
+    ports:
+      - 8080:8080
+
+#  celery:
+#    image: webserver:v1
+#    container_name: celery
+#    depends_on:
+#      - rabbitmq
+#      - webserver
+#    environment:
+#      - CELERY_BROKER_URL=amqp://rabbitmq
+#    command: celery -A simple_app worker -l info -Q queue1,queue2,queue3
+#    volumes:
+#      - .:/simple_app
+#    networks:
+#      - back-tier
+#    deploy:
+#      resources:
+#        limits:
+#          cpus: '0.50'
+#          memory: 150M
+#        reservations:
+#          cpus: '0.25'
+#          memory: 50M
+
+volumes:
+  postgresql:
+  postgresql_data:
