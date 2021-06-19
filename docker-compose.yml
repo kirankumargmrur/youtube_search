@@ -10,13 +10,12 @@ services:
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: wDnfWovh4uf3
-    ports:
-      - "5432:5432"
     networks:
       - back-tier
     volumes:
       - ./postgresql:/var/lib/postgresql
       - ./postgresql_data:/var/lib/postgresql/data
+      - ./init-user-db.sh:/docker-entrypoint-initdb.d/init-user-db.sh
 
   rabbitmq:
     image: rabbitmq:3.8.17-management

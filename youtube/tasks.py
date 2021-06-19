@@ -24,7 +24,6 @@ def get_data():
     for apiKey in apiKeys:
         logger.info("Using the key {}".format(apiKey))
         try:
-            logger.info("Apikey {}".format(apiKey))
             youtube = build(youtube_api_svc_name, youtube_api_version, developerKey=apiKey)
             search = youtube.search().list(q=settings.QUERY_STRING, part="id, snippet", order="date", maxResults=20,
                                            publishedAfter=(last_request_time.replace(microsecond=0).isoformat() + 'Z'))
