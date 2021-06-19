@@ -9,7 +9,7 @@ To make an API to fetch latest videos sorted in reverse chronological order of t
 - Make a dashboard to view the stored videos with filters and sorting options (optional)
     
 ## How to <i>Setup</i>
- - Follow the instructions on docker website [https://docs.docker.com/engine/install/] to install docker on your system.
+ - Follow the instructions on [docker website](https://docs.docker.com/engine/install/) to install docker on your system.
  - Install docker compose - https://docs.docker.com/compose/install/
  - Clone the repository and navigate inside it
  - Run `docker-compose up -d --build`
