@@ -78,7 +78,6 @@ services:
           memory: 50M
 
   webserver_2:
-    build: .
     image: webserver:v1
     hostname: webserver_2
     container_name: webserver_2
