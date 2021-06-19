@@ -35,17 +35,17 @@ The application will come up @http://localhost
 
 ## API Description
 This App contains the following 
-##### Get Api [http://SERVER_IP/videos](http://localhost/videos)
+##### Get Api [(http://SERVER_IP/videos)](http://localhost/videos)
   - This will list the stored videos in reverse chronological order of their publishing date
 
 
-##### Search Api [http://SERVER_IP/search?q=](http://localhost/search?q=)
+##### Search Api [(http://SERVER_IP/search?q=query_string)](http://localhost/search?q=)
   - This is search api which will accept either title or description as a querying parameter and returns the videos that has the query parameter either in their title or description.
   You need to pass the query string in the url after `q=`
   
   For example: http://localhost/search?q=cricket. Here `cricket` is the querying parameter
 
-##### Dashboard [http://SERVER_IP/dashboard)](http://localhost/dashboard)
+##### Dashboard [(http://SERVER_IP/dashboard)](http://localhost/dashboard)
   - A dashboard which will be having the list of all stored videos. You can filter videos either using search bar provided or you can choose the video from the available list of videos in the dropdown. It also has options to sort elements in ascending or descending order based on the field choosen.
 
 ### Reference
