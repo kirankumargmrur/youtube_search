@@ -12,7 +12,22 @@ To make an API to fetch latest videos sorted in reverse chronological order of t
  - Follow the instructions on [docker website](https://docs.docker.com/engine/install/) to install docker on your system.
  - Install docker compose - https://docs.docker.com/compose/install/
  - Clone the repository and navigate inside it
- - Run `docker-compose up -d --build`
+ - Create `.env` file.
+ 
+   Example:
+    ```CELERY_BROKER_URL='amqp://rabbitmq'
+    CELERY_TASK_DEFAULT_QUEUE='fampay'
+    GOOGLE_API_KEYS=APIKEY_1,APIKEY_2,APIKEY_3,....,APIKEY_N
+    QUERY_STRING=cricket
+    DB_NAME='fampay'
+    DB_USER='postgres'
+    DB_PASSWORD='wDnfWovh4uf3'
+    DB_HOST='db'```
+    
+  You can copy and paste the above contents to `.env` file and replace APIKEY_1,APIKEY_2,...,APIKEY_N with your Google api keys. 
+  And also replace DB_PASSWORD value, you refer [docker-compose.yml](/docker-compose.yml) for database password
+  
+ - Finalpy run `docker-compose up -d --build` from your terminal
 
 The application will come up @http://localhost
 
