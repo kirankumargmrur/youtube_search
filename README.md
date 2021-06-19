@@ -40,7 +40,7 @@ This App contains the following
 
 
 ##### Search Api [(http://SERVER_IP/search?q=query_string)](http://localhost/search?q=)
-  - This is search api which will accept either title or description as a querying parameter and returns the videos that has the query parameter either in their title or description.
+  - This is search api which will accept a querying parameter and returns the videos that has the query string either in their title or description.
   You need to pass the query string in the url after `q=`
   
   For example: http://localhost/search?q=cricket. Here `cricket` is the querying parameter
