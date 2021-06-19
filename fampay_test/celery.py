@@ -21,7 +21,7 @@ app.autodiscover_tasks(settings.INSTALLED_APPS)
 app.conf.beat_schedule = {
  'run-every-ten-seconds': {
     'task': 'youtube.tasks.get_data',
-    'schedule': 30.0
+    'schedule': 10.0
  }
 }
 @app.task(bind=True)
