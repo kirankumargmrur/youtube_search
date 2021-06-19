@@ -29,7 +29,7 @@ This App contains the following
   For example: http://localhost/search?q=cricket. Here `cricket` is the querying parameter
 
 ##### Dashboard (http://SERVER_IP/dashboard)
-  - A dashboard which will be having the list of all stored videos. You can filter videos either using search bar provided or you can choose the video from the available list of videos in the dropdown.It also has options to sort elements in ascending or descending based on the field choosen.
+  - A dashboard which will be having the list of all stored videos. You can filter videos either using search bar provided or you can choose the video from the available list of videos in the dropdown. It also has options to sort elements in ascending or descending order based on the field choosen.
 
 ### Reference
 [YouTube data v3 API](https://developers.google.com/youtube/v3/getting-started)
