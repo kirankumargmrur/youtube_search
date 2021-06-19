@@ -133,7 +133,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 #App Variables
 
-QUERY_STRING = 'cricket'
-GOOGLE_API_KEYS = ['AIzaSyDd7INdZ6IuFdXOlLD_i9OMA24m4CfXEgs']
+QUERY_STRING = config('QUERY_STRING', 'cricket')
+GOOGLE_API_KEYS = config('GOOGLE_API_KEYS', cast=lambda v: [s.strip() for s in v.split(',')], default= [])
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='amqp://localhost')
 CELERY_TASK_DEFAULT_QUEUE = config('CELERY_TASK_DEFAULT_QUEUE', default="fampay")

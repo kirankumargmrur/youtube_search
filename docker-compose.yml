@@ -6,7 +6,7 @@ networks:
 services:
   db:
     image: postgres:12
-    container_name: metabase_db
+    container_name: postgres
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: wDnfWovh4uf3
@@ -41,27 +41,111 @@ services:
     ports:
       - 8080:8080
 
-#  celery:
-#    image: webserver:v1
-#    container_name: celery
-#    depends_on:
-#      - rabbitmq
-#      - webserver
-#    environment:
-#      - CELERY_BROKER_URL=amqp://rabbitmq
-#    command: celery -A simple_app worker -l info -Q queue1,queue2,queue3
-#    volumes:
-#      - .:/simple_app
-#    networks:
-#      - back-tier
-#    deploy:
-#      resources:
-#        limits:
-#          cpus: '0.50'
-#          memory: 150M
-#        reservations:
-#          cpus: '0.25'
-#          memory: 50M
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    volumes:
+      - ./nginx/:/etc/nginx/conf.d/
+    depends_on:
+      - webserver_1
+      - webserver_2
+    networks:
+      - back-tier
+    ports:
+      - 80:80
+
+  webserver_1:
+    build: .
+    image: webserver:v1
+    hostname: webserver_1
+    container_name: webserver_1
+    depends_on:
+      - rabbitmq
+      - db
+    command: 'bash /app/docker-entrypoint.sh'
+    volumes:
+      - .:/app
+    networks:
+      - back-tier
+#    ports:
+#    - 8000:8000
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 150M
+        reservations:
+          cpus: '0.25'
+          memory: 50M
+
+  webserver_2:
+    build: .
+    image: webserver:v1
+    hostname: webserver_2
+    container_name: webserver_2
+    depends_on:
+      - rabbitmq
+      - db
+    command: 'bash /app/docker-entrypoint.sh'
+    volumes:
+      - .:/app
+    networks:
+      - back-tier
+#    ports:
+#      - 9000:8000
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 150M
+        reservations:
+          cpus: '0.25'
+          memory: 50M
+
+  worker:
+    image: webserver:v1
+    container_name: celery
+    depends_on:
+      - rabbitmq
+      - db
+    environment:
+      - CELERY_BROKER_URL=amqp://rabbitmq
+    command: celery -A fampay_test worker -l info
+    volumes:
+      - .:/app
+    networks:
+      - back-tier
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 150M
+        reservations:
+          cpus: '0.25'
+          memory: 50M
+
+  beat:
+    image: webserver:v1
+    container_name: beat
+    depends_on:
+      - rabbitmq
+      - worker
+      - db
+    environment:
+      - CELERY_BROKER_URL=amqp://rabbitmq
+    command: celery -A fampay_test beat -l info
+    volumes:
+      - .:/app
+    networks:
+      - back-tier
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 150M
+        reservations:
+          cpus: '0.25'
+          memory: 50M
 
 volumes:
   postgresql:

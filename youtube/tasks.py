@@ -22,7 +22,9 @@ def get_data():
     is_key_valid = False
 
     for apiKey in apiKeys:
+        logger.info("Using the key {}".format(apiKey))
         try:
+            logger.info("Apikey {}".format(apiKey))
             youtube = build(youtube_api_svc_name, youtube_api_version, developerKey=apiKey)
             search = youtube.search().list(q=settings.QUERY_STRING, part="id, snippet", order="date", maxResults=20,
                                            publishedAfter=(last_request_time.replace(microsecond=0).isoformat() + 'Z'))
@@ -30,6 +32,7 @@ def get_data():
             is_key_valid = True
         except googleapiclient.errors.HttpError as err:
             response_code = err.resp.status
+            logger.error("ERROR: {}".format(err))
             if not (response_code == 400 or response_code == 403):
                 break
 

@@ -18,6 +18,10 @@ from django.urls import path
 from youtube import views
 
 urlpatterns = [
+
     path('admin/', admin.site.urls),
-    path('videos/', views.GetApiView.as_view())
+    path('', views.HomePageView.as_view(), name='home'),
+    path('videos/', views.GetApiView.as_view(), name='get_videos'),
+    path('search/', views.SearchApiView.as_view(), name='search_results'),
+    path('dashboard/', views.SearchView.as_view(), name='dashboard_results'),
 ]

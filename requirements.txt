@@ -3,7 +3,6 @@ certifi
 chardet
 celery
 Django
-django-background-tasks
 django-common-helpers
 django-environ
 django-filter
@@ -12,6 +11,7 @@ google-api-python-client
 google-auth
 google-auth-httplib2
 google-auth-oauthlib
+gunicorn
 httplib2
 idna
 Markdown

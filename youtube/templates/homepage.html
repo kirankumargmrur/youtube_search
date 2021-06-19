@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <title>{% block title %}Fampay site{% endblock %}</title>
+</head>
+
+<body>
+    <h2>This App Contains the following Pages</h2>
+    <div id="sidebar">
+        {% block sidebar %}
+        <ul>
+            <li><a href="/videos/">Get Api</a> <p>- This will list the stored videos in reverse chronological
+                order of their publishing date</p></li>
+            <br>
+            <li><a href="/search?q=">Search Api</a> <p> - This is search api which will accept either title
+                or description as a querying parameter and returns the videos that has the query parameter
+                either in their title or description</p></li>
+            <li><a href="/dashboard">Dashboard</a> <p>A dashboard which will be having the list of all stored videos. You can filter videos either using search bar
+                 provided or you can choose the video from the available list of videos in the dropdown. <br>
+                It also has options to sort elements in ascending or descending based on the field choosen.</li>
+        </ul>
+        {% endblock %}
+    </div>
+
+    <div id="content">
+        <h5>Code Repo: <a href="https://github.com/kirankumargmrur/fampay_youtube_search">Github Repo</a></h5>
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>

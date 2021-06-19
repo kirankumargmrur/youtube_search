@@ -1,0 +1,39 @@
+<body>
+<h1 xmlns="http://www.w3.org/1999/html">Dashboard</h1>
+
+<form action="{% url 'dashboard_results' %}" method="get">
+    <input name="q" type="text" placeholder="Search...">
+    <button class="btn btn btn-outline-info my-2 my-sm-0" type="submit"> Search </button>
+    <label>Sort By: </label>
+        <select name="sortby" id="sort_vidoes">
+            <option value="published">published</option>
+            <option value="channel">channel</option>
+            <option value="title">title</option>
+            <option value="video_id">video_id</option>
+            <option value="description">description</option>
+        </select>
+    <label>Sorting order</label>
+        <select name="sortorder" id="sort_order">
+            <option value="desc">desc</option>
+            <option value="asc">asc</option>
+        </select>
+    <label for="videos">Choose a video:</label>
+        <select name="filterQ" id="vidoes">
+            <option value="">""</option>
+            {% for result in search_results %}
+            <option value="{{result.title}}">{{result.title}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit" value="Submit">
+    {% for result in search_results %}
+    <div>
+    <p></p>
+        <iframe width="400" height="300" src="https://www.youtube.com/embed/{{result.video_id}}?controls=0"></iframe>
+       <h4>Title: {{result.title}}</h4>
+        <p><b>Description:</b> {{result.description}}</p>
+    </div>
+    {% empty %}
+       <h2>No Results Found</h2>
+    {% endfor %}
+</form>
+</body>
