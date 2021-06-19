@@ -12,14 +12,14 @@ To make an API to fetch latest videos sorted in reverse chronological order of t
  - Follow the instructions on [docker website](https://docs.docker.com/engine/install/) to install docker on your system.
  - Install docker compose - https://docs.docker.com/compose/install/
  - Clone the repository and navigate inside it
- - Create `.env` file inside fampay_test folder.
+ - Create `.env` file.
  
    Example:
     ```CELERY_BROKER_URL='amqp://rabbitmq'
     CELERY_TASK_DEFAULT_QUEUE='fampay'
     GOOGLE_API_KEYS=APIKEY_1,APIKEY_2,APIKEY_3,....,APIKEY_N
     QUERY_STRING=cricket
-    DB_NAME='postgres'
+    DB_NAME='fampay'
     DB_USER='postgres'
     DB_PASSWORD='wDnfWovh4uf3'
     DB_HOST='db'```
